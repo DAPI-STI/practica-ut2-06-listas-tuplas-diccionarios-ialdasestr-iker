@@ -12,5 +12,10 @@ def unique_preserve_order(values: list[int]) -> list[int]:
 
     Requisito:
     - No modifiques la lista original.
+
     """
-    raise NotImplementedError("Implementa unique_preserve_order(values)")
+    l2 = []
+    for x in values:
+        if x not in l2:
+            l2.append(x)
+    return l2
