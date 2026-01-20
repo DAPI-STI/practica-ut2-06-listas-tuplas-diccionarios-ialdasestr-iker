@@ -22,4 +22,16 @@ def checkout(cart: list[tuple[str, int]]) -> tuple[dict[str, float], float]:
     [("Pan", 2), ("Huevos", 1), ("Pan", 1)] ->
       ({"Pan": 4.2, "Huevos": 2.3}, 6.5)
     """
-    raise NotImplementedError("Implementa checkout(cart)")
+    for productos, unidades in cart:
+        if unidades < 0:
+            raise ValueError("Las unidades tienen que ser positivas")
+
+        if productos not in PRICES:
+            raise ValueError(f"Producto no existente: {productos}")
+
+        coste = PRICES[productos] * unidades
+
+        checkout[productos] = checkout(productos, 0) + coste
+        total += coste
+
+    return checkout, total
